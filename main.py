@@ -201,10 +201,14 @@ while running:
         if world.check_level_complete():
             world.money += c.LEVEL_COMPLETE_REWARD
             world.level += 1
-            level_started = False
-            last_enemy_spawn = pg.time.get_ticks()
-            world.reset_level()
-            world.process_enemies()
+            if world.level <= c.TOTAL_LEVELS:
+                level_started = False
+                last_enemy_spawn = pg.time.get_ticks()
+                world.reset_level()
+                world.process_enemies()
+            else:
+                game_over = True
+                game_outcome = 1
 
         # Draw buttons:
         # Button for placing turrets
